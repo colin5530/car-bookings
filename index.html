@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Car Bookings</title>
+	<meta charset="UTF-8" />
+  <link rel="stylesheet" type="text/css" href="src/styles.css" />
+</head>
+
+<body>
+	<div id="app">
+    <h1>Car Bookings</h1>
+    <div class='legend-container'>
+    <div class='legend-content'>
+      <div class='legend-title'>Legend</div>
+        <div class='legend-pickup'>
+          <div class='legend-event-title'>Pick Up</div>
+          <div class='legend-datetime'><span class='legend-event-attribute-title'>Date:</span> <span id='pickup-date'></span></div>
+          <div class='legend-location'><span class='legend-event-attribute-title'>Location:</span> <span id='pickup-location'></span></div>
+        </div>
+        <div class='legend-return'>
+          <div class='legend-event-title'>Return</div>
+          <div class='legend-datetime'><span class='legend-event-attribute-title'>Date:</span> <span id='return-date'></span></div>
+          <div class='legend-location'><span class='legend-event-attribute-title'>Location:</span> <span id='return-location'></span></div>
+        </div>
+      </div>
+    </div>
+    <div id="content"></div>
+  </div>
+
+	<script src="./src/index.js"></script>
+  <script src="./src/VehicleCard.js">
+	</script>
+</body>
+
+</html>

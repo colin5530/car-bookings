@@ -1,0 +1,123 @@
+
+.legend-content {
+  display: inline-flex;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: auto;
+}
+
+.legend-title {
+  align-self: flex-end;
+  font-size: 26px;
+}
+
+.legend-event-title {
+  font-weight: 600;
+  border-bottom: 1px solid;
+}
+
+.legend-event-attribute-title {
+  font-size: 14px;
+  color: #888;
+}
+
+.vehicle-card {
+  width: 90%;
+  border: 2px solid grey;
+  border-radius: 5px;
+  margin: 10px auto;
+}
+
+.vehicle-title {
+  font-size: 24px;
+  font-weight: 700;
+  border-bottom: 1px solid grey;
+  box-shadow: grey 0 1px 2px;
+  padding: 5px;
+}
+
+.vehicle-content-container {
+  display: inline-flex;
+  width: 100%;
+}
+
+.vehicle-image {
+  width: 40%;
+  margin: 5px
+}
+
+.vehicle-content {
+  width: 70%;
+  margin: 5px;
+  position: relative;
+}
+
+.vehicle-details-container {
+  display: inline-flex;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 10px;
+}
+
+.vehicle-details {
+  width: 40%;
+}
+
+.vehicle-attribute {
+  /* font-weight: 550; */
+  /* text-align: right; */
+  /* display: inline-flex;
+  justify-content: space-between; */
+  display: flex;
+}
+
+.vehicle-attribute-title {
+  font-size: 14px;
+  color: #888;
+  width: 50%;
+  /* font-weight: 500; */
+  /* text-align: left; */
+}
+
+.vehicle-vendor-details {
+  width: 40%;
+}
+
+.vehicle-availability-container {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-evenly;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.vehicle-availability {
+  font-size: 24px;
+  align-self: flex-end;
+}
+
+.available {
+  color: green;
+}
+
+.unavailable {
+  color: red;
+}
+
+.vehicle-rate-price {
+  font-size: 12px;
+  color: #888;
+}
+
+.vehicle-rate-price-title {
+  font-weight: 600;
+}
+
+.vehicle-total-price {
+  font-size: 20px;
+}
+
+.vehicle-total-price-title {
+  font-weight: 700;
+}
