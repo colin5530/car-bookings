@@ -1,13 +1,8 @@
-const VehicleCard = (vehicle) => {
-  const currencyCodeSymbols = {
-    'EUR': '€',
-    'GBP': '£',
-    'USD': '$',
-    'CAD': '$',
-  }
-      
+import { currencyCodeSymbols } from '../utils/index.js';
+
+const VehicleCard = (vehicle) => {      
   const card = `
-    <div class='vehicle-card' onclick='handleClick'>
+    <div class='vehicle-card'>
       <div class='vehicle-title'>${vehicle.name}</div>
       <div class='vehicle-content-container'>
         <img class='vehicle-image' src=${vehicle.pictureURL} alt=${vehicle.name} />
@@ -45,12 +40,9 @@ const VehicleCard = (vehicle) => {
 
   const cardElement = document.createElement('div');
   cardElement.id = 'vehicle-card-parent';
-  // cardElement.addEventListener('click', (e) => {
-  //   console.log('clicked!', e);
-  //   e.stopPropagation();
-  // });
+  cardElement.name = `${vehicle.id}`
   cardElement.innerHTML = card;
   return cardElement;
 }
 
-// module.exports={VehicleCard};
+export default VehicleCard;

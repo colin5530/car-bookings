@@ -10,9 +10,9 @@
 <body>
 	<div id="app">
     <h1>Car Bookings</h1>
-    <div class='legend-container'>
-    <div class='legend-content'>
-      <div class='legend-title'>Legend</div>
+    <div id='legend' class='legend-container'>
+      <div class='legend-content'>
+        <div class='legend-title'>Legend</div>
         <div class='legend-pickup'>
           <div class='legend-event-title'>Pick Up</div>
           <div class='legend-datetime'><span class='legend-event-attribute-title'>Date:</span> <span id='pickup-date'></span></div>
@@ -25,11 +25,11 @@
         </div>
       </div>
     </div>
+    <div id='back-btn'></div>
     <div id="content"></div>
   </div>
 
-	<script src="./src/index.js"></script>
-  <script src="./src/VehicleCard.js">
+	<script type="module" src="./src/index.js"></script>
 	</script>
 </body>
 

@@ -64,10 +64,6 @@
 }
 
 .vehicle-attribute {
-  /* font-weight: 550; */
-  /* text-align: right; */
-  /* display: inline-flex;
-  justify-content: space-between; */
   display: flex;
 }
 
@@ -75,8 +71,6 @@
   font-size: 14px;
   color: #888;
   width: 50%;
-  /* font-weight: 500; */
-  /* text-align: left; */
 }
 
 .vehicle-vendor-details {
@@ -120,4 +114,58 @@
 
 .vehicle-total-price-title {
   font-weight: 700;
+}
+
+.back-button {
+  padding: 10px;
+  background-color: indianred;
+  color: white;
+  border: 1px solid indianred;
+  border-radius: 5px;
+}
+
+.profile-page {
+  margin: 10px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.profile-name {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.profile-details {
+  display: inline-flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.profile-attribute {
+  width: 40%;
+  display: inline-flex;
+  margin: 3px 10px;
+  justify-content: space-between;
+}
+
+.profile-footer {
+  display: inline-flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.profile-availability {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.profile-rate-price {
+  color: #888;
+}
+
+.profile-total-price {
+  font-size: 20px;
 }
