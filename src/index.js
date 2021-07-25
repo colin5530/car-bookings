@@ -21,6 +21,10 @@ const openHomePage = () => {
   const legend = document.getElementById('legend');
   legend.style.display = 'block';
 
+  // show sorting
+  const sorting = document.getElementById('sorting-container');
+  sorting.style.display = 'block';
+
   // remove back button
   const backBtn = document.getElementById('back-btn');
   backBtn.removeChild(backBtn.children[0]);
@@ -52,6 +56,10 @@ const openProfilePage = (vehicleId) => {
   // hide filters
   const filterBar = document.getElementById('filter-bar');
   filterBar.style.display = 'none';
+
+  // hide sorting
+  const sorting = document.getElementById('sorting-container');
+  sorting.style.display = 'none';
 
   // add back button
   const backBtn = document.createElement('button');
