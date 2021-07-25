@@ -1,3 +1,7 @@
+.legend-container {
+  border-bottom: 1px solid grey;
+  padding: 10px 0;
+}
 
 .legend-content {
   display: inline-flex;
@@ -19,6 +23,14 @@
 .legend-event-attribute-title {
   font-size: 14px;
   color: #888;
+}
+
+.filter-bar-container {
+  display: inline-flex;
+}
+
+.filter-container {
+  margin: 10px;
 }
 
 .vehicle-card {

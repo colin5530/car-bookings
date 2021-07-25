@@ -1,8 +1,11 @@
 import VehicleCard from './VehicleCard.js';
 import ProfilePage from './ProfilePage.js';
+import FilterBar from './FilterBar.js';
+import { processVehicleData } from '../utils/index.js'
 
 let rawData;
 let availableVehicles = [];
+let filters = [];
 
 fetch('http://www.cartrawler.com/ctabe/cars.json')
   .then(response => response.json())
@@ -10,37 +13,6 @@ fetch('http://www.cartrawler.com/ctabe/cars.json')
     rawData = data[0]
     renderCarApp(data[0]);
   });
-
-const processVehicleData = (vehicleData) => {
-  const flattenedVehicles = [];
-  vehicleData.forEach(vendor => {
-    vendor.VehAvails.forEach(vehicle => {
-      flattenedVehicles.push({
-        id: `${vendor.Vendor['@Name']}-${vehicle.Vehicle.VehMakeModel['@Name']}-${vehicle.Vehicle['@Code']}-${vehicle.TotalCharge['@RateTotalAmount']}`,
-        name: vehicle.Vehicle.VehMakeModel['@Name'],
-        airConditioning: vehicle.Vehicle['@AirConditionInd'],
-        baggageQuantity: vehicle.Vehicle['@BaggageQuantity'],
-        code: vehicle.Vehicle['@Code'],
-        codeContext: vehicle.Vehicle['@CodeContext'],
-        doorCount: vehicle.Vehicle['@DoorCount'],
-        driveType: vehicle.Vehicle['@DriveType'],
-        fuelType: vehicle.Vehicle['@FuelType'],
-        passengerQuantity: vehicle.Vehicle['@PassengerQuantity'],
-        transmission: vehicle.Vehicle['@TransmissionType'],
-        pictureURL: vehicle.Vehicle['PictureURL'],
-        currencyCode: vehicle.TotalCharge['@CurrencyCode'],
-        estimatedTotal: vehicle.TotalCharge['@EstimatedTotalAmount'],
-        rate: vehicle.TotalCharge['@RateTotalAmount'],
-        status: vehicle['@Status'],
-        vendor: {
-          name: vendor.Vendor['@Name'],
-          code: vendor.Vendor['@Code'],
-        }
-      })
-    })
-  });
-  return flattenedVehicles;
-}
 
 const openHomePage = () => {
 
@@ -76,6 +48,10 @@ const openProfilePage = (vehicleId) => {
   const legend = document.getElementById('legend');
   legend.style.display = 'none';
 
+  // hide filters
+  const filterBar = document.getElementById('filter-bar');
+  filterBar.style.display = 'none';
+
   // add back button
   const backBtn = document.createElement('button');
   backBtn.className='back-button';
@@ -87,6 +63,41 @@ const openProfilePage = (vehicleId) => {
   content.appendChild(ProfilePage(vehicle));
 }
 
+const handleFilterChange = (column, value) => {
+  const filterIndex = filters.findIndex(filter => filter.column === column);
+  // if filter doesn't already exist, add filter
+  if (filterIndex === -1) {
+    if (value !== 'ALL') {
+      filters.push({column, value});
+    }
+  } else {
+    // if filter does already exist, change value
+    value === 'ALL'
+      ? filters.splice(filterIndex, 1)
+      : filters[filterIndex] = {column, value};
+  }
+
+  // remove car list
+  const content = document.getElementById('content');
+  const children = content.childNodes;
+  const childLength = children.length
+  for (let i = 0; i < childLength; i++) {
+    content.removeChild(children[0]);
+  }
+
+  // show car list
+  renderCarApp(rawData);
+}
+
+const checkFilters = (vehicle) => {
+  return filters.reduce((pass, filter) => {
+    if (vehicle[filter.column] !== filter.value) {
+      return false;
+    }
+    return pass;
+  }, true);
+}
+
 const renderCarApp = (data) => {
   availableVehicles = processVehicleData(data?.VehAvailRSCore?.VehVendorAvails);
   
@@ -96,9 +107,17 @@ const renderCarApp = (data) => {
   document.getElementById('return-date').innerHTML = new Date(data.VehAvailRSCore.VehRentalCore['@ReturnDateTime']).toUTCString();
   document.getElementById('return-location').innerHTML = data.VehAvailRSCore.VehRentalCore.ReturnLocation['@Name'];
 
-  const content = document.getElementById('content');
+  // show filters
+  const filterBar = document.getElementById('filter-bar');
+  if (filterBar.children.length > 0) {
+    filterBar.style.display = 'block';
+  } else {
+    filterBar.appendChild(FilterBar(availableVehicles, handleFilterChange))
+  }
 
+  const content = document.getElementById('content');
   availableVehicles
+    .filter(vehicle => checkFilters(vehicle))
     .sort((a, b) => parseFloat(a.estimatedTotal) - parseFloat(b.estimatedTotal))
     .map(vehicle => {
       const card = VehicleCard(vehicle);
