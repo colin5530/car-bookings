@@ -4,7 +4,7 @@ const ProfilePage = (vehicle) => {
   const content = document.createElement('div');
   content.innerHTML = `
     <div class='profile-page'>
-      <img src=${vehicle.pictureURL} alt='car' />
+      <img src=${vehicle.pictureURL} alt='car' class='profile-image' />
       <div class='profile-name'>${vehicle.name}</div>
       <div class='profile-details'>
         <div class='profile-attribute'><span class='profile-attribute-title'>Fuel Type:</span><span>${vehicle.fuelType}</span></div>

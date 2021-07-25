@@ -142,17 +142,23 @@ const renderCarApp = (data) => {
   sortInput.addEventListener('change', handleSortChange);
 
   const content = document.getElementById('content');
-  availableVehicles
-    .filter(checkFilters)
-    .sort(sortVehicles)
-    .map(vehicle => {
-      const card = VehicleCard(vehicle);
-      card.addEventListener('click', (e) => {
-        const vehicleNo = e.path.find((elem) => elem.id === 'vehicle-card-parent').name;
-        openProfilePage(vehicleNo);
-      });
-      return card;
-    })
-    .forEach(element => content.appendChild(element));
-
+  const filteredVehicles = availableVehicles.filter(checkFilters)
+  if (filteredVehicles.length > 0) {
+    filteredVehicles
+      .sort(sortVehicles)
+      .map(vehicle => {
+        const card = VehicleCard(vehicle);
+        card.addEventListener('click', (e) => {
+          const vehicleNo = e.path.find((elem) => elem.id === 'vehicle-card-parent').name;
+          openProfilePage(vehicleNo);
+        });
+        return card;
+      })
+      .forEach(element => content.appendChild(element));
+  } else {
+    const noCars = document.createElement('div');
+    noCars.className = 'no-cars-message';
+    noCars.innerHTML = `<div>There are no cars available matching your settings.</div><div>Try changing the filters</div>`;
+    content.appendChild(noCars);
+  }
 };
