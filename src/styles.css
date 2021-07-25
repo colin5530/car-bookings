@@ -33,6 +33,10 @@
   margin: 10px;
 }
 
+#sorting-container {
+  margin: 0 10px;
+}
+
 .vehicle-card {
   width: 90%;
   border: 2px solid grey;

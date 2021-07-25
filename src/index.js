@@ -6,6 +6,7 @@ import { processVehicleData } from '../utils/index.js'
 let rawData;
 let availableVehicles = [];
 let filters = [];
+let sortColumn = 'estimatedTotal';
 
 fetch('http://www.cartrawler.com/ctabe/cars.json')
   .then(response => response.json())
@@ -77,6 +78,29 @@ const handleFilterChange = (column, value) => {
       : filters[filterIndex] = {column, value};
   }
 
+  refreshRender();
+}
+
+const checkFilters = (vehicle) => {
+  return filters.reduce((pass, filter) => {
+    if (vehicle[filter.column] !== filter.value) {
+      return false;
+    }
+    return pass;
+  }, true);
+}
+
+const handleSortChange = (e) => {
+  sortColumn = e.target.value;
+
+  refreshRender();
+}
+
+const sortVehicles = (a, b) => {
+  return parseFloat(a[sortColumn]) - parseFloat(b[sortColumn])
+}
+
+const refreshRender = () => {
   // remove car list
   const content = document.getElementById('content');
   const children = content.childNodes;
@@ -87,15 +111,6 @@ const handleFilterChange = (column, value) => {
 
   // show car list
   renderCarApp(rawData);
-}
-
-const checkFilters = (vehicle) => {
-  return filters.reduce((pass, filter) => {
-    if (vehicle[filter.column] !== filter.value) {
-      return false;
-    }
-    return pass;
-  }, true);
 }
 
 const renderCarApp = (data) => {
@@ -115,10 +130,13 @@ const renderCarApp = (data) => {
     filterBar.appendChild(FilterBar(availableVehicles, handleFilterChange))
   }
 
+  const sortInput = document.getElementById('sorting-container');
+  sortInput.addEventListener('change', handleSortChange);
+
   const content = document.getElementById('content');
   availableVehicles
-    .filter(vehicle => checkFilters(vehicle))
-    .sort((a, b) => parseFloat(a.estimatedTotal) - parseFloat(b.estimatedTotal))
+    .filter(checkFilters)
+    .sort(sortVehicles)
     .map(vehicle => {
       const card = VehicleCard(vehicle);
       card.addEventListener('click', (e) => {
